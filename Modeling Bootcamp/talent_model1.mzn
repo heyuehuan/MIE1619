@@ -37,8 +37,6 @@ actorsToScenes = array2d(1..num_actors,1..num_scenes,
       0,0,0,0,1,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,
       0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0
    ]);
-   
-% cannot solve in 3 hours
 
 % 
 
