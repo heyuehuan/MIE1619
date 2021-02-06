@@ -140,7 +140,14 @@ constraint
      forall(i in 1..num_scenes) (
        ( i > s_to[a]) -> (actorsToScenes[a, scene_order[i]] = 0)
      )
-     
+     /\     
+     forall(i in 1..num_scenes) (
+        (actorsToScenes[a, scene_order[i]] = 1) -> (s_from[a]<=i)
+     )
+     /\
+     forall(i in 1..num_scenes) (
+        (actorsToScenes[a, scene_order[i]] = 1) -> ( i <= s_to[a])
+     )
      /\ % and now: count the waiting time for from..to
      waiting_time[a] = 
          sum(i in 1..num_scenes) (

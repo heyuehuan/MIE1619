@@ -150,10 +150,10 @@ def run(mdls, timeout):
     print(results)
 
 
-    with open("results.json", 'w+') as out:
+    with open("results_{}.json".format(timeout), 'w+') as out:
         json.dump(results, out)
 
-    with open("no_results.json", 'w+') as out:
+    with open("no_results_{}.json".format(timeout), 'w+') as out:
         json.dump(no_sln, out)
 
 if __name__ == "__main__":
@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
     # Params
     timeout = 300
-    mdls = ['talent_model1.mzn', 'talent_model2.mzn']
+    mdls = ['talent_model1.mzn', "talent_model1-redundant.mzn", 'talent_model2.mzn']
     run(mdls, timeout)
 
 
