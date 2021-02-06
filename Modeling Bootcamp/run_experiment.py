@@ -7,8 +7,6 @@ import time
 import numpy as np
 import multiprocessing as mp
 
-from mlflow import log_metric, log_param, log_artifacts, start_run, end_run, create_experiment
-
 
 INSTANCE_FOLDER = "./data/Problems"
 # SAVE_TO_FOLDER = "./data/instances_mdl1"
@@ -164,7 +162,7 @@ if __name__ == "__main__":
     no_sln = {"ids": [], "num_scenes":[], "num_actors":[], "sln_status": [], "instance_name":[], "mdl_name":[]}
 
     # Params
-    timeout = 600
+    timeout = 300
     mdls = ['talent_model1.mzn', 'talent_model2.mzn']
     run(mdls, timeout)
 
