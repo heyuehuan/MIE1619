@@ -19,6 +19,27 @@ include "globals.mzn";
 %   ]);
 
 
+% num_scenes = 8;
+% num_actors = 10;
+% max_cost = 4;
+% duration = [1, 2, 2, 1, 1, 5, 5, 3];
+% actor_cost = [4, 2, 3, 3, 2, 1, 1, 2, 4, 4];
+% actorsToScenes = array2d(1..num_actors,1..num_scenes,
+%      [
+% 1,1,1,1,1,1,1,1,
+% 1,1,1,1,1,1,1,0,
+% 0,1,0,0,0,0,0,0,
+% 0,0,0,0,0,0,0,1,
+% 1,0,0,0,0,0,0,1,
+% 1,1,1,1,0,0,0,1,
+% 0,0,0,0,0,0,1,0,
+% 1,0,1,1,1,0,0,1,
+% 0,0,1,1,1,1,1,1,
+% 1,1,1,1,1,0,0,1,
+%    ]);
+
+
+
 % Film 1 
 
 % num_scenes = 20;
@@ -107,18 +128,19 @@ constraint
      % or ends with 0.
      % This means that we collect the rehearsals with many 0 at the ends
      %
-     s_from[a] < s_to[a]
+     s_from[a] <= s_to[a]
      /\
      
      % compute first scene
      forall(i in 1..num_scenes) (
-        i < s_from[a] -> (actorsToScenes[a, scene_order[i]] = 0)
+        (i < s_from[a]) -> (actorsToScenes[a, scene_order[i]] = 0)
      )
      /\
      % compute last scene
      forall(i in 1..num_scenes) (
-        i > s_to[a] -> (actorsToScenes[a, scene_order[i]] = 0)
+       ( i > s_to[a]) -> (actorsToScenes[a, scene_order[i]] = 0)
      )
+     
      /\ % and now: count the waiting time for from..to
      waiting_time[a] = 
          sum(i in 1..num_scenes) (
@@ -139,6 +161,9 @@ output[
   "film order: " , show(scene_order), "\n",
   "waiting_time: ", show(waiting_time), "\n",
   "total_cost: " , show(total_cost), "\n",
+  "duration: ", show(duration),"\n",
+  "s_from: ", show(s_from),"\n",
+  "s_to: ", show(s_to),"\n"
 ] ++ 
 [
   if j = 1 then "\n" else " " endif ++
