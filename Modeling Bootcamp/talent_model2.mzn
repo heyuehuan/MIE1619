@@ -80,7 +80,8 @@ array[Scenes] of var set of Actors: before;
 array[Scenes] of var set of Actors: after; 
 array[Scenes] of var set of Actors: during; 
 %var int: total_cost;
-var 0..max_SceneDuration*max_ActorCost*num_scenes*num_actors: total_cost;
+%var 0..max_SceneDuration*max_ActorCost*num_scenes*num_actors: total_cost;
+var 0..sum(duration)*max_ActorCost*num_actors: total_cost;
 
 constraint alldifferent(order);
 

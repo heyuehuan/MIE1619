@@ -83,7 +83,8 @@ array[1..num_actors] of var 0..sum(duration): waiting_time; % waiting time for p
 array[1..num_actors] of var 1..num_scenes: s_from; % first rehearsal
 array[1..num_actors] of var 1..num_scenes: s_to;   % last rehearsal
 array[1..num_actors] of var 1..max_cost: actor_cost;
-var 0..(max_cost*sum(duration)): total_cost = sum(i in 1..num_actors) (waiting_time[i]*actor_cost[i]); % objective
+%var int: total_cost = sum(i in 1..num_actors) (waiting_time[i]*actor_cost[i]); % objective
+var 0..(max_cost*sum(duration)*num_actors): total_cost = sum(i in 1..num_actors) (waiting_time[i]*actor_cost[i]); % objective
 
 solve :: int_search(
          scene_order % ++ waiting_time% ++ p_from ++ p_to ++ [total_waiting_time]
